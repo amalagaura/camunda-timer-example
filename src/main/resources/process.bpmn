@@ -8,7 +8,7 @@
     <bpmn:boundaryEvent id="BoundaryEventTimer" attachedToRef="UserTask">
       <bpmn:outgoing>SequenceFlow_1ir0ulr</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P2D</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P1D</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1ir0ulr" sourceRef="BoundaryEventTimer" targetRef="MessageEndEvent" />

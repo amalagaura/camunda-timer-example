@@ -2,10 +2,8 @@ package example;
 
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
-import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.RequiredHistoryLevel;
@@ -18,9 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.assertThat;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.assertEquals;
+import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.assertThat;
 
 
 /**
@@ -60,7 +57,11 @@ public class ProcessUnitTest {
     public void testWaitState() {
         ProcessInstance processInstance = processEngine().getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
         assertThat(processInstance).isWaitingAtExactly("UserTask");
-        ClockUtil.setCurrentTime(new DateTime().plusWeeks(2).toDate());
+        ClockUtil.setCurrentTime(new DateTime().plusHours(1).toDate());
+        execute(job());
+        assertThat(processInstance).isWaitingAtExactly("UserTask");
+        ClockUtil.setCurrentTime(new DateTime().plusDays(1).toDate());
+        execute(job());
         assertThat(processInstance).isWaitingAtExactly("UserTask", "MessageEndEvent");
     }
 }
