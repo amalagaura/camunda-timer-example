@@ -2,8 +2,10 @@ package example;
 
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
+import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.RequiredHistoryLevel;
@@ -18,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.assertThat;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -46,7 +49,8 @@ public class ProcessUnitTest {
 
         // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
         assertThat(processInstance).isWaitingAtExactly("UserTask");
-        execute(job());
+        complete(task(processInstance));
+
         assertThat(processInstance).isEnded();
     }
 
