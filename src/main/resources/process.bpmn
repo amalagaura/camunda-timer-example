@@ -4,8 +4,8 @@
     <bpmn:startEvent id="StartEvent">
       <bpmn:outgoing>SequenceFlow_1h04nen</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1h04nen" sourceRef="StartEvent" targetRef="WaitHere" />
-    <bpmn:boundaryEvent id="BoundaryEventTimer" attachedToRef="WaitHere">
+    <bpmn:sequenceFlow id="SequenceFlow_1h04nen" sourceRef="StartEvent" targetRef="UserTask" />
+    <bpmn:boundaryEvent id="BoundaryEventTimer" attachedToRef="UserTask">
       <bpmn:outgoing>SequenceFlow_1ir0ulr</bpmn:outgoing>
       <bpmn:timerEventDefinition>
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P2D</bpmn:timeDuration>
@@ -19,11 +19,11 @@
     <bpmn:endEvent id="EndEvent">
       <bpmn:incoming>SequenceFlow_1d4plz2</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1d4plz2" sourceRef="WaitHere" targetRef="EndEvent" />
-    <bpmn:serviceTask id="WaitHere" name="ExternalTask" camunda:type="external" camunda:topic="ExternalTopic">
+    <bpmn:sequenceFlow id="SequenceFlow_1d4plz2" sourceRef="UserTask" targetRef="EndEvent" />
+    <bpmn:userTask id="UserTask" name="User Task">
       <bpmn:incoming>SequenceFlow_1h04nen</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1d4plz2</bpmn:outgoing>
-    </bpmn:serviceTask>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:message id="Message_1xuuil7" name="Message_3rcb41e" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -52,7 +52,7 @@
         <di:waypoint x="370" y="117" />
         <di:waypoint x="432" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0hbgnmn_di" bpmnElement="WaitHere">
+      <bpmndi:BPMNShape id="UserTask_0wpbp1f_di" bpmnElement="UserTask">
         <dc:Bounds x="270" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

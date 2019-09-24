@@ -1,7 +1,7 @@
 # Test configuration using spring-boot
 
 camunda.bpm:
-  job-execution.enabled: false
+  job-execution.enabled: true
   id-generator: simple
 
 spring.datasource:
